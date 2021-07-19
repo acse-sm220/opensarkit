@@ -1,28 +1,22 @@
 #!/bin/bash
-
 # The MIT License (MIT)
 # Copyright (c) 2016 Andreas Vollrath
-
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is furnished
 # to do so, subject to the following conditions:
-
 # The above copyright notice and this permission notice shall be
 # included in all copies or substantial portions of the Software.
-
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
 # INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
 # PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
 # HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
-
 OSK_VERSION="0.1-beta"
-
-if [ "$#" == "0" ];then
+if [ "$#" == "0" ]; then 
 
 	echo -e ""
 	echo -e "----------------------------------"
@@ -32,7 +26,7 @@ if [ "$#" == "0" ];then
 	echo -e ""
 	export OSK_HOME=/usr/local/lib/osk
 
-elif [ "$#" == "1" ];then
+elif [ "$#" == "1" ]; then 
 
 	echo -e ""
 	echo -e "----------------------------------"
@@ -43,7 +37,7 @@ elif [ "$#" == "1" ];then
 	export OSK_HOME=$1
 
 
-elif [ "$#" == "2" ];then
+elif [ "$#" == "2" ]; then 
 
 	echo -e ""
 	echo -e "----------------------------------"
@@ -52,9 +46,7 @@ elif [ "$#" == "2" ];then
 	echo -e "----------------------------------"
 	echo -e ""
 	export OSK_HOME=$1
-
 else
-
 	echo -e ""
 	echo -e "----------------------------------"
 	echo -e " Open Foris SAR Toolkit, version ${OSK_VERSION}"
@@ -90,10 +82,9 @@ echo " OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WIT
 echo " OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
 echo " "
 
-if [[ $2 != yes ]];then
-read -p " Did you read and accept the terms and conditions? (yes/no) "
-if [[ $REPLY != yes ]]
-then
+if [[ $2 != "yes" ]]; then 
+	read -p " Did you read and accept the terms and conditions? (yes/no) "
+if [[ $REPLY != "yes" ]]; then 
     exit 1
 fi
 fi
@@ -102,13 +93,12 @@ echo ""
 echo ""
 echo ""
 
-if [[ $2 != yes ]];then
+if [[ $2 != yes ]]; then
 echo " This script downloads the external software SNAP, which is licensed under the GNU GPL version 3 and can be found here"
 echo " https://www.gnu.org/licenses/gpl.html"
 echo ""
 read -p " Do you accept the terms and conditions of the use of the SNAP software  (yes/no) "
-if [[ $REPLY != yes ]]
-then
+if [[ $REPLY != yes ]]; then  
     exit 1
 fi
 fi
@@ -135,7 +125,7 @@ add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu/ ${RELEASE} main mul
 duration=$SECONDS && echo -e " done ($(($duration / 60)) minutes and $(($duration % 60)) seconds elapsed)"
 
 ## IX R-CRAN from R mirror
-if grep -q "qgis.org/ubuntugis" /etc/apt/sources.list;then
+if grep -q "qgis.org/ubuntugis" /etc/apt/sources.list; then
 
 	echo "detected cran repository for R installation"
 else
@@ -145,7 +135,7 @@ else
 	gpg -a --export E084DAB9 | apt-key add - >> ${OSK_HOME}/LOG/log_install 2>&1
 fi
 
-if grep -q "qgis.org/ubuntugis" /etc/apt/sources.list;then
+if grep -q "qgis.org/ubuntugis" /etc/apt/sources.list; then
 	echo " Yeah, you are already a QGIS user, nice!"
 else
 
@@ -292,10 +282,10 @@ cd ${OSK_HOME}/opensarkit/bins
 
 BINDIR=/usr/local/bin/
 
-for OST_BINS in `ls -1 -d */`;do
+for OST_BINS in `ls -1 -d */`; do 
 
 	cd $OST_BINS
-	for exe in `ls -1 {ost_*,post_*} 2>/dev/null`;do
+	for exe in `ls -1 {ost_*,post_*} 2>/dev/null`; do 
 
 		exepath=`readlink -f $exe`
 		ln -s $exepath ${BINDIR}/
